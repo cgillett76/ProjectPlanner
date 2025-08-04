@@ -1,6 +1,5 @@
 #include "../headers/Project.h"
-#include <nlohmann/json.hpp>
-#include <iostream>
+#include "../headers/Utilities.h"
 
 // Constructors & Deconstructors
 Project::Project()
@@ -8,12 +7,12 @@ Project::Project()
 }
 
 Project::Project(std::string name, std::string startDate, std::string manager)
-    : name{name}, startDate{startDate}, manager{manager}
+    : name{name}, startDate{convertDate(startDate)}, manager{manager}, startDateStr{startDate}
 {
 }
 
 Project::Project(std::string name, std::string startDate, std::string manager, std::vector<Task> tasks)
-    : name{name}, startDate{startDate}, manager{manager}, tasks{tasks}
+    : name{name}, startDate{convertDate(startDate)}, manager{manager}, tasks{tasks}
 {
 }
 
@@ -22,6 +21,11 @@ Project::~Project()
 }
 
 // Methods
+void Project::createProjectTask(std::string name, std::string startDate, int duration, std::string endDate)
+{
+    Task task{name, startDate, duration, endDate};
+    this->tasks.push_back(task);
+}
 
 // ADL serialization in same namespace as Project
 namespace nlohmann
@@ -30,7 +34,7 @@ namespace nlohmann
     {
         j = json{
             {"name", project.name},
-            {"startDate", project.startDate},
+            {"startDate", project.startDateStr},
             {"manager", project.manager},
             {"tasks", project.tasks}};
     }
@@ -38,8 +42,10 @@ namespace nlohmann
     {
         try
         {
+
             j.at("name").get_to(project.name);
-            j.at("startDate").get_to(project.startDate);
+            // j.at("startDate").get_to(project.startDate);
+            j.at("startDate").get_to(project.startDateStr);
             j.at("manager").get_to(project.manager);
             j.at("tasks").get_to(project.tasks);
         }

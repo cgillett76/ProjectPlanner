@@ -11,14 +11,16 @@ class Task
 {
 private:
     std::string name;
-    std::string startDate;
+    std::string startDateStr;
     int durationDays;
-    std::string endDate;
+    std::string endDateStr;
+    std::chrono::year_month_day startDate;
+    std::chrono::year_month_day endDate;
 
 public:
     // Constructors & Deconstructors
     Task();
-    Task(std::string name, std::string startDate, int durationDays, std::string endDate);
+    Task(std::string name, std::string startDateStr, int durationDays, std::string endDateStr);
     ~Task();
 
     // Method Prototypes

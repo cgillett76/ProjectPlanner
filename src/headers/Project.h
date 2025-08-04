@@ -6,13 +6,15 @@
 #include <chrono>
 #include <nlohmann/json.hpp>
 #include "Task.h"
+#include "Utilities.h"
 
 class Project
 {
 private:
     std::string name;
-    std::string startDate;
+    std::chrono::year_month_day startDate;
     std::string manager;
+    std::string startDateStr;
     std::vector<Task> tasks;
 
 public:
@@ -24,6 +26,7 @@ public:
 
     // Method prototypes
     friend struct nlohmann::adl_serializer<Project>;
+    void createProjectTask(std::string name, std::string startDate, int duration, std::string endDate);
 };
 
 // ADL serialiation

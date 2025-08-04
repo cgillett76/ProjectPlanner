@@ -7,21 +7,21 @@
 #include <nlohmann/json.hpp>
 #include <nlohmann/json-schema.hpp>
 
+
 int main()
 {
-	std::vector<Task> gensisTasks;
+	// Project *gensis = new Project{"Genesis", "04-08-2025", "Chris Gillett"};
+	Project gensis{"Genesis", "04-08-2025", "Chris Gillett"};
 
-	Task *firstTask = new Task{"First task", "04-08-2025", 5, "09-08-2025"};
-	Task *secondTask = new Task{"Second task", "12-08-2025", 5, "17-08-2025"};
+	gensis.createProjectTask("First task", "04-08-2025", 5, "09-08-2025");
+	gensis.createProjectTask("Second task", "12-08-2025", 5, "17-08-2025");
+	gensis.createProjectTask("Third task", "20-08-2025", 5, "25-08-2025");
 
-	gensisTasks.push_back(*firstTask);
-	gensisTasks.push_back(*secondTask);
-
-	Project *gensis = new Project{"Genesis", "04-08-2025", "Chris Gillett", gensisTasks};
-
-	nlohmann::json gensisJson = *gensis;
+	nlohmann::json gensisJson = gensis;
 
 	std::cout << gensisJson.dump(4) << std::endl;
+
+	// delete gensis;
 
 	return 0;
 }
