@@ -1,0 +1,17 @@
+{
+    "name": "Genesis Project",
+    "startDate": "04-08-2025",
+    "manager": "Chris Gillett",
+    "tasks": [
+        {
+            "name": "The first task in the project",
+            "startDate": "04-08-2025",
+            "endDate": "08-08-2025"
+        },
+        {
+            "name": "The second task in the project",
+            "startDate": "11-08-2025",
+            "endDate": "16-08-2025"
+        }
+    ]
+}
