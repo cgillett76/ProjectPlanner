@@ -1,4 +1,4 @@
-.gitignore
-/src/build/
-/src/main
-/.vscode/
+.vscode/
+src/main
+src/main.exe
+src/build
