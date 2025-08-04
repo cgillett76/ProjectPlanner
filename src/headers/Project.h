@@ -1,8 +1,11 @@
 #ifndef _PROJECT_H_
 #define _PROJECT_H_
 
+#include <string>
+#include <vector>
 #include <chrono>
 #include <nlohmann/json.hpp>
+#include "Task.h"
 
 class Project
 {
@@ -10,11 +13,13 @@ private:
     std::string name;
     std::string startDate;
     std::string manager;
+    std::vector<Task> tasks;
 
 public:
     // Constructors & Deconstructors
     Project();
     Project(std::string name, std::string startDate, std::string manager);
+    Project(std::string name, std::string startDate, std::string manager, std::vector<Task> tasks);
     ~Project();
 
     // Method prototypes
