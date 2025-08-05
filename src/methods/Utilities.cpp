@@ -1,10 +1,6 @@
 #include "../headers/Utilities.h"
 
-int multiplyNumbers(int a, int b)
-{
-    return a * b;
-}
-
+// returns year_month_day chrono date
 std::chrono::year_month_day convertDate(std::string dateStr)
 {
     unsigned int day, month;
@@ -21,6 +17,7 @@ std::chrono::year_month_day convertDate(std::string dateStr)
     return chronoDate;
 }
 
+// converts Chronon year_month_day to a string
 std::string convertDateToString(std::chrono::year_month_day chronoDate)
 {
     std::ostringstream oss;
@@ -30,4 +27,10 @@ std::string convertDateToString(std::chrono::year_month_day chronoDate)
 
     std::string dateStr = oss.str();
     return dateStr;
+}
+
+// prints a chrono date
+void printChronoDate(std::chrono::year_month_day chronoDate)
+{
+    std::cout << chronoDate << std::endl;
 }

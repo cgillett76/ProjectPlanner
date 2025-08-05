@@ -4,9 +4,9 @@
 #include <chrono>
 #include "headers/Project.h"
 #include "headers/Task.h"
+#include "headers/Utilities.h"
 #include <nlohmann/json.hpp>
 #include <nlohmann/json-schema.hpp>
-
 
 int main()
 {
@@ -23,5 +23,15 @@ int main()
 
 	// delete gensis;
 
-	return 0;
+	std::chrono::year_month_day chronoDate;
+
+	std::chrono::weekday duration{5};
+
+	std::chrono::day today{5};
+
+	chronoDate.day() = today;
+
+	// const auto now{std::chrono::system_clock::now};
+
+		return 0;
 }
