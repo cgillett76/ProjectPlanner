@@ -20,10 +20,12 @@ private:
 public:
     // Constructors & Deconstructors
     Task();
+    Task(std::string name, std::string startDateStr, int durationDays);
     Task(std::string name, std::string startDateStr, int durationDays, std::string endDateStr);
     ~Task();
 
     // Method Prototypes
+    std::chrono::year_month_day calculateEndDate(std::chrono::year_month_day startDate, int durationDays);
     friend struct nlohmann::adl_serializer<Task>;
 };
 

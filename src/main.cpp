@@ -13,9 +13,9 @@ int main()
 	// Project *gensis = new Project{"Genesis", "04-08-2025", "Chris Gillett"};
 	Project gensis{"Genesis", "04-08-2025", "Chris Gillett"};
 
-	gensis.createProjectTask("First task", "04-08-2025", 5, "09-08-2025");
-	gensis.createProjectTask("Second task", "12-08-2025", 5, "17-08-2025");
-	gensis.createProjectTask("Third task", "20-08-2025", 5, "25-08-2025");
+	gensis.createProjectTask("First task", "04-08-2025", 5);
+	gensis.createProjectTask("Second task", "12-08-2025", 5);
+	gensis.createProjectTask("Third task", "20-08-2025", 5);
 
 	nlohmann::json gensisJson = gensis;
 
@@ -23,15 +23,5 @@ int main()
 
 	// delete gensis;
 
-	std::chrono::year_month_day chronoDate;
-
-	std::chrono::weekday duration{5};
-
-	std::chrono::day today{5};
-
-	chronoDate.day() = today;
-
-	// const auto now{std::chrono::system_clock::now};
-
-		return 0;
+	return 0;
 }

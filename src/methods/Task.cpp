@@ -6,6 +6,14 @@ Task::Task()
 {
 }
 
+Task::Task(std::string name, std::string startDateStr, int durationDays)
+    : name{name}, startDateStr{startDateStr}, durationDays{durationDays}
+{
+    this->startDate = convertDate(this->startDateStr);
+    this->endDate = this->calculateEndDate(this->startDate, this->durationDays);
+    this->endDateStr = convertDateToString(endDate);
+}
+
 Task::Task(std::string name, std::string startDateStr, int durationDays, std::string endDateStr)
     : name{name}, startDateStr{startDateStr}, durationDays{durationDays}, endDateStr{endDateStr}, startDate{convertDate(startDateStr)}, endDate{convertDate(endDateStr)}
 {
@@ -16,6 +24,21 @@ Task::~Task()
 }
 
 // Methods
+std::chrono::year_month_day Task::calculateEndDate(std::chrono::year_month_day startDate, int durationDays)
+{
+    std::chrono::sys_days startDays = std::chrono::sys_days(startDate);
+
+    while (durationDays > 0)
+    {
+        startDays += std::chrono::days{1};
+        std::chrono::weekday weekDay{startDays};
+        if (weekDay != std::chrono::Saturday && weekDay != std::chrono::Sunday)
+        {
+            --durationDays;
+        }
+    }
+    return std::chrono::year_month_day{startDays};
+}
 
 // ADL serialization in same namespace as Task
 namespace nlohmann

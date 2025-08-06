@@ -21,6 +21,12 @@ Project::~Project()
 }
 
 // Methods
+void Project::createProjectTask(std::string name, std::string startDate, int duration)
+{
+    Task task{name, startDate, duration};
+    this->tasks.push_back(task);
+}
+
 void Project::createProjectTask(std::string name, std::string startDate, int duration, std::string endDate)
 {
     Task task{name, startDate, duration, endDate};

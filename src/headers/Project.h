@@ -26,6 +26,7 @@ public:
 
     // Method prototypes
     friend struct nlohmann::adl_serializer<Project>;
+    void createProjectTask(std::string name, std::string startDate, int duration);
     void createProjectTask(std::string name, std::string startDate, int duration, std::string endDate);
 };
 
