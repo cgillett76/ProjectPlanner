@@ -7,9 +7,8 @@
 #include "headers/Utilities.h"
 #include <nlohmann/json.hpp>
 #include <nlohmann/json-schema.hpp>
-#include <ctime>
-#include <openssl/sha.h>
-#include <openssl/evp.h>
+// #include <openssl/sha.h>
+// #include <openssl/evp.h>
 
 int main()
 {
@@ -25,11 +24,9 @@ int main()
 	// std::cout << gensisJson.dump(4) << std::endl;
 
 	// delete gensis;
-	const std::chrono::time_point currentTime{std::chrono::system_clock::now()};
+	// const std::chrono::time_point currentTime{std::chrono::system_clock::now()};
 
-	const std::chrono::year_month_day currentDate{std::chrono::floor<std::chrono::days>(currentTime)};
+	// const std::chrono::year_month_day currentDate{std::chrono::floor<std::chrono::days>(currentTime)};
 
-	std::cout << currentDate << std::endl;
-
-	return 0;
+	// std::cout << currentDate << std::endl;
 }
