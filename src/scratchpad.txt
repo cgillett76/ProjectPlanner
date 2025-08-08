@@ -74,3 +74,40 @@ std::chrono::year_month_day formatChronoDate(std::string dateStr)
 
 	return oss.str();
 }
+
+
+// Openssl Commandline
+// create private key
+openssl genrsa -aes-256-cbc -out alice_private.key
+openssl genrsa -aes-256-cbc -out bob_private.key
+
+// create public key
+openssl rsa -in alice_private.key -pubout > alice_public.key
+openssl rsa -in bob_private.key -pubout > bob_public.key
+
+// encrypt the file 'message' with bob_public.key
+openssl pkeyautl -encrypt -inkey bob_public.key -pubin -in message -out message.encrypt
+
+// sign the message.encrypt 
+openssl dgst -sha256 -sign alice_private.key -out message.signature message.encrypt
+openssl base64 -in message.signature -out alice_signature
+
+// copy the message.encrypt and alice_signature files to bob
+cp alice_signature ../bob/
+cp message_encrypt ../bob/
+
+// move to bob folder
+
+// use the alice_signature file to get the message.signature
+openssl base64 -d -in alice_signature -out message.signed
+
+// verify that the message.encrypt file has come from alice_signature
+openssl dgst -sha256 -verify alice_public.key -signature message.signature message.encrypt
+
+Verified OK
+
+// now Bob can decrpt the message.encrypt file
+openssl pkeyutl -decrypt -inkey bob_private.key -in message.encrypt > message
+
+// view the message
+cat message
