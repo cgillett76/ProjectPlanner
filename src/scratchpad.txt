@@ -98,7 +98,8 @@ cp message_encrypt ../bob/
 
 // move to bob folder
 
-// use the alice_signature file to get the message.signature
+// use the alice_signature file to get the message.signaturecd \
+
 openssl base64 -d -in alice_signature -out message.signed
 
 // verify that the message.encrypt file has come from alice_signature

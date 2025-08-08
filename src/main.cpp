@@ -29,4 +29,16 @@ int main()
 	// const std::chrono::year_month_day currentDate{std::chrono::floor<std::chrono::days>(currentTime)};
 
 	// std::cout << currentDate << std::endl;
+
+	std::string pass = "strongpassword";
+	std::string filename = "alice_private.pem";
+
+	if (generateEncryptedRsaPrivateKey(filename, pass))
+	{
+		std::cout << "Encrypted RSA private key saved to: " << filename << std::endl;
+	}
+	else
+	{
+		std::cerr << "Failed to generate encrypted private key." << std::endl;
+	}
 }

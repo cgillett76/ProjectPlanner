@@ -63,3 +63,54 @@ std::string generateHash(const std::string &input)
 
     return oss.str();
 }
+
+bool generateEncryptedRsaPrivateKey(const std::string &filename, const std::string &passphrase)
+{
+    int bits = 2048;
+    bool success{false};
+    EVP_PKEY_CTX *ctx{nullptr};
+    EVP_PKEY *privateKey{nullptr};
+    FILE *filePtr{nullptr};
+
+    OpenSSL_add_all_algorithms();
+
+    ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_RSA, nullptr);
+    const EVP_CIPHER *cipher = EVP_aes_256_cbc();
+    if (!ctx)
+    {
+        goto cleanup;
+    }
+
+    if (EVP_PKEY_keygen_init(ctx) <= 0)
+    {
+        goto cleanup;
+    }
+
+    if (EVP_PKEY_CTX_set_rsa_keygen_bits(ctx, bits) <= 0)
+    {
+        goto cleanup;
+    }
+
+    filePtr = fopen(filename.c_str(), "wb");
+    if (!filePtr)
+    {
+        goto cleanup;
+    }
+
+    if (!PEM_write_PrivateKey(filePtr, privateKey, cipher, (unsigned char *)passphrase.c_str(), passphrase.length(), nullptr, nullptr))
+    {
+        goto cleanup;
+    }
+
+    success = true;
+
+cleanup:
+    if (filePtr)
+        fclose(filePtr);
+    if (privateKey)
+        EVP_PKEY_free(privateKey);
+    if (ctx)
+        EVP_PKEY_CTX_free(ctx);
+
+    return success;
+}
